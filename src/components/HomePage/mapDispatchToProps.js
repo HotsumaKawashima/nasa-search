@@ -1,9 +1,11 @@
 import * as Action from './action';
 
+import { pushSearchPage } from '../SearchPage/operation';
+
 export const onInputKeyDown = (e) => {
   return (dispatch, getState) => {
     if (e.key === 'Enter') {
-      console.log(getState().searchPage.input);
+      dispatch(pushSearchPage(getState().homePage.input));
     }
   }
 }
