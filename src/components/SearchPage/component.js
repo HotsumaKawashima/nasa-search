@@ -39,21 +39,11 @@ function SearchPage(props) {
     <div>
       <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
       <div className={classes.wrapper}>
-        <div>
-          <img className={classes.image} src='/images/nasa-logo-web-rgb.png' />
-        </div>
-        <div>
-          <img className={classes.image} src='/images/nasa-logo-web-rgb.png' />
-        </div>
-        <div>
-          <img className={classes.image} src='/images/nasa-logo-web-rgb.png' />
-        </div>
-        <div>
-          <img className={classes.image} src='/images/nasa-logo-web-rgb.png' />
-        </div>
-        <div>
-          <img className={classes.image} src='/images/nasa-logo-web-rgb.png' />
-        </div>
+        { props.items.map(item =>
+          <div key={item.href}>
+            <img className={classes.image} src={item.links[0].href} />
+          </div>
+        )}
       </div>
     </div>
   )

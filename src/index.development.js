@@ -8,7 +8,7 @@ import { configureStore } from './components/store';
 import history            from './components/history';
 import App                from './components/App';
 
-import { watchFetchPhoto } from './sagas/fetchPhoto/saga';
+import watchFetchPhoto from './sagas/fetchPhoto/saga';
 
 function* sagas() {
   yield all([

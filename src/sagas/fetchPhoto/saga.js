@@ -11,25 +11,29 @@ function timer() {
 }
 
 const fetchPhoto = payload => {
-  return new Promise(resolve => {
-    google.script.run
-      .withFailureHandler(error => resolve({ error: true, payload: error }))
-      .withSuccessHandler(() => resolve({}))
-      .generateSpreadsheet(payload);
-  });
+  const searchParams = new URLSearchParams();
+  searchParams.append('q', payload.query);
+  searchParams.append('media_type', 'image');
+
+  return fetch('https://images-api.nasa.gov/search?' + searchParams.toString())
+    .then(response => response.json())
+    .then(json => ({ json }));
 }
 
 function* watch(api) {
   while (true) {
     const { payload } = yield take(Action.FETCH_PHOTO);
 
-    const { error } = yield call(api, payload);
+    const { error, json } = yield call(api, payload);
 
-    if (!error) {
-      yield put(Action.fetchPhotoSuccess());
-    } else {
+    if(error) {
       yield put(Action.fetchPhotoFailure());
+      continue;
     }
+
+    const items = json.collection.items.slice(0, 10);
+
+    yield put(Action.fetchPhotoSuccess(items));
   }
 }
 

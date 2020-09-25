@@ -11,10 +11,11 @@ export const fetchPhoto = (query) => {
 
 export const FETCH_PHOTO_SUCCESS = 'FetchPhotoAction.FETCH_PHOTO_SUCCESS';
 
-export const fetchPhotoSuccess = () => {
+export const fetchPhotoSuccess = (items) => {
   return {
     type: FETCH_PHOTO_SUCCESS,
     payload: {
+      items
     }
   }
 }

@@ -1,13 +1,15 @@
 import * as Action from './action';
+import * as FetchPhotoAction from '../../sagas/fetchPhoto/action';
 
 import { pushSearchPage } from './operation';
 
 export const onLoadPage = () => {
   return (dispatch, getState) => {
-    const { q } = getState().router.location.query;
+    const searchParams = new URLSearchParams(getState().router.location.search)
 
-    if(q) {
-      dispatch(Action.changeInput(q));
+    if(searchParams.has('q')) {
+      dispatch(Action.changeInput(searchParams.get('q')));
+      dispatch(FetchPhotoAction.fetchPhoto(searchParams.get('q')));
     }
   }
 }
