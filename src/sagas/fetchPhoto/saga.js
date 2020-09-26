@@ -18,7 +18,8 @@ const fetchPhoto = request => {
 
   return fetch('https://images-api.nasa.gov/search?' + searchParams.toString())
     .then(response => response.json())
-    .then(json => ({ json }));
+    .then(json => ({ json }))
+    .catch(error => ({ error }));
 }
 
 function* watch(api) {
