@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case FETCH_PHOTO_ACTION_TYPE.FETCH_PHOTO_SUCCESS : {
       return {
         ...state,
-        items: action.payload.items
+        items: action.payload.items,
       }
     }
 

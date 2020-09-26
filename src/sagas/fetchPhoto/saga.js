@@ -10,10 +10,11 @@ function timer() {
   });
 }
 
-const fetchPhoto = payload => {
+const fetchPhoto = request => {
   const searchParams = new URLSearchParams();
-  searchParams.append('q', payload.query);
+  searchParams.append('q', request.query);
   searchParams.append('media_type', 'image');
+  searchParams.append('page', request.page);
 
   return fetch('https://images-api.nasa.gov/search?' + searchParams.toString())
     .then(response => response.json())
@@ -24,14 +25,21 @@ function* watch(api) {
   while (true) {
     const { payload } = yield take(Action.FETCH_PHOTO);
 
-    const { error, json } = yield call(api, payload);
+    const request = {
+      query: payload.query,
+      page: Math.floor((payload.page - 1) * 10 / 100) + 1
+    }
+
+    const { error, json } = yield call(api, request);
 
     if(error) {
       yield put(Action.fetchPhotoFailure());
       continue;
     }
 
-    const items = json.collection.items.slice(0, 10);
+    console.log((payload.page - 1) * 10 % 100);
+    console.log(payload.page * 10 % 100 ? payload.page * 10 % 100 : 100);
+    const items = json.collection.items.slice((payload.page - 1) * 10 % 100, payload.page * 10 % 100 ? payload.page * 10 % 100 : 100);
 
     yield put(Action.fetchPhotoSuccess(items));
   }

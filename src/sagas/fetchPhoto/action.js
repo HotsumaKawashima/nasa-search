@@ -1,10 +1,11 @@
 export const FETCH_PHOTO = 'FetchPhotoAction.FETCH_PHOTO';
 
-export const fetchPhoto = (query) => {
+export const fetchPhoto = (query, page) => {
   return {
     type: FETCH_PHOTO,
     payload: {
-      query
+      query,
+      page,
     }
   }
 }
@@ -15,7 +16,7 @@ export const fetchPhotoSuccess = (items) => {
   return {
     type: FETCH_PHOTO_SUCCESS,
     payload: {
-      items
+      items,
     }
   }
 }
