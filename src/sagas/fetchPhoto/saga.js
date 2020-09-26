@@ -27,7 +27,7 @@ function* watch(api) {
 
     const request = {
       query: payload.query,
-      page: Math.floor((payload.page - 1) * 10 / 100) + 1
+      page: payload.page
     }
 
     const { error, json } = yield call(api, request);
@@ -37,11 +37,7 @@ function* watch(api) {
       continue;
     }
 
-    console.log((payload.page - 1) * 10 % 100);
-    console.log(payload.page * 10 % 100 ? payload.page * 10 % 100 : 100);
-    const items = json.collection.items.slice((payload.page - 1) * 10 % 100, payload.page * 10 % 100 ? payload.page * 10 % 100 : 100);
-
-    yield put(Action.fetchPhotoSuccess(items));
+    yield put(Action.fetchPhotoSuccess(json.collection.items));
   }
 }
 
