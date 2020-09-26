@@ -15,36 +15,40 @@ const styles = {
   },
   wrapper: {
     marginTop: '25px',
-    marginLeft: '180px',
-    display: 'grid',
-    gridTemplateColumns: '800px',
-    gridGap: '30px',
+    marginLeft: '20px',
+    marginRight: '20px',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    flexBasis: 'auto',
+  },
+  imageBox: {
+    margin: '5px',
+    flexGrow: '1',
   },
   image: {
-    width: '150px',
-    height: '150px',
+    width: '300px',
+    height: '200px',
     objectFit: 'cover',
-    float: 'left',
-    marginRight: '20px',
   },
   descriptionBox: {
     marginTop: '10px',
+    marginBottom: '20px',
+    width: '300px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   title: {
-    fontSize: '20px',
+    fontSize: '14px',
+    color: '#3c4043',
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline',
     }
   },
-  description: {
-    height: '100px',
-    width: '630px',
-    overflow: 'hidden',
-  },
   bottom: {
-    marginTop: '20px',
-    marginLeft: '520px',
+    textAlign: 'center',
+    marginTop: '10px',
     fontSize: '20px',
   },
   next: {
@@ -74,11 +78,10 @@ function SearchPage(props) {
       <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
       <div className={classes.wrapper}>
         { props.items.map(item =>
-          <div key={item.href}>
+          <div key={item.href} className={classes.imageBox}>
             <img className={classes.image} src={item.links[0].href} />
             <div className={classes.descriptionBox}>
               <a className={classes.title} href={item.links[0].href}>{item.data[0].title}</a>
-              <div className={classes.description}>{item.data[0].description}</div>
             </div>
           </div>
         )}
