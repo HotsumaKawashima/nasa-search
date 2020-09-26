@@ -33,11 +33,15 @@ function* watch(api) {
     const { error, json } = yield call(api, request);
 
     if(error) {
-      yield put(Action.fetchPhotoFailure());
+      yield put(Action.fetchPhotoSuccess([]));
       continue;
     }
 
-    yield put(Action.fetchPhotoSuccess(json.collection.items));
+    if(json.collection) {
+      yield put(Action.fetchPhotoSuccess(json.collection.items));
+    } else {
+      yield put(Action.fetchPhotoSuccess([]));
+    }
   }
 }
 

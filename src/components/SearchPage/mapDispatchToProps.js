@@ -43,11 +43,32 @@ export const onClickNext = (e) => {
       return;
     }
 
+    document.documentElement.scrollTop = 0;
+
     if(!searchParams.has('page')) {
       dispatch(pushSearchPage(searchParams.get('q'), 2));
       return;
     }
 
     dispatch(pushSearchPage(searchParams.get('q'), Number(searchParams.get('page')) + 1));
+  }
+}
+
+export const onClickPrev = (e) => {
+  return (dispatch, getState) => {
+    e.preventDefault();
+
+    const searchParams = new URLSearchParams(getState().router.location.search)
+
+    if(!searchParams.has('q')) {
+      return;
+    }
+
+    if(!searchParams.has('page')) {
+      return;
+    }
+
+    document.documentElement.scrollTop = 0;
+    dispatch(pushSearchPage(searchParams.get('q'), Number(searchParams.get('page')) - 1));
   }
 }

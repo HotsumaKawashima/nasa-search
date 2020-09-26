@@ -87,8 +87,8 @@ function SearchPage(props) {
         )}
       </div>
       <div className={classes.bottom}>
-        <a href='#' className={classes.prev} onClick={props.onClickNext}>prev</a>
-        <a href='#' className={classes.next} onClick={props.onClickNext}>next</a>
+        { props.page !== 1 && <a href='#' className={classes.prev} onClick={props.onClickPrev}>prev</a> }
+        { !(props.items.length < 100) && <a href='#' className={classes.next} onClick={props.onClickNext}>next</a> }
       </div>
     </div>
   )
