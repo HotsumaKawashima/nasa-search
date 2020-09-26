@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const clientEntry = {
   production:  './src/index.js',
@@ -35,8 +36,10 @@ module.exports = (env, argv) => {
 
       plugins: [
         new HtmlWebpackPlugin({
-          template: './public/index.html'
-        })
+          template: './public/index.html',
+          inlineSource: 'index.js',
+        }),
+        new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
       ]
     },
   ];
