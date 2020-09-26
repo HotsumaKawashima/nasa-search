@@ -10,6 +10,12 @@ export const onInputKeyDown = (e) => {
   }
 }
 
+export const onClickSearchButton = () => {
+  return (dispatch, getState) => {
+    dispatch(pushSearchPage(getState().homePage.input));
+  }
+}
+
 export const onInputChange = (e) => {
   return (dispatch, getState) => {
     dispatch(Action.changeInput(e.target.value));
