@@ -82,6 +82,7 @@ const styles = {
     textAlign: 'center',
     marginTop: '10px',
     fontSize: '20px',
+    height: '60px',
   },
   next: {
     textDecoration: 'none',
