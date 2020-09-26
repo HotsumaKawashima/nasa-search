@@ -3,9 +3,36 @@ import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/styles';
 
 const styles = {
+  inputBox: {
+    top: '0px',
+    left: '0px',
+    width: '100%',
+    height: '110px',
+    backgroundColor: '#FFFF',
+    position: 'fixed',
+    display: 'flex',
+    boxShadow: '0px 0px 3px 0px rgba(51,48,0,0.4)',
+  },
+  logo: {
+    marginTop: '28px',
+    height: '70px',
+  },
+  searchButton: {
+    outline: '0',
+    marginTop: '45px',
+    marginLeft: '30px',
+    height: '40px',
+    backgroundColor: '#0B3D91',
+    color: '#FFFF',
+    border: 'none',
+    fontWeight: 'bold',
+    padding: '8px 16px 8px 16px',
+    borderRadius: '8px',
+    textDecoration: 'none',
+  },
   input: {
     marginTop: '40px',
-    marginLeft: '180px',
+    marginLeft: '10px',
     outline: 'none',
     borderRadius: '22px',
     height: '44px',
@@ -19,7 +46,7 @@ const styles = {
     left: 'calc(50% - 80px/2)'
   },
   wrapper: {
-    marginTop: '25px',
+    marginTop: '125px',
     marginLeft: '20px',
     marginRight: '20px',
     display: 'flex',
@@ -80,13 +107,17 @@ function SearchPage(props) {
 
   return (
     <div>
-      <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
+      <div className={classes.inputBox}>
+        <img className={classes.logo} src='/images/nasa-logo-web-rgb.png' />
+        <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
+        <button className={classes.searchButton} onClick={props.onClickSearchButton}>SEARCH !</button>
+      </div>
       { props.loading ? <img className={classes.load} src='/images/load.gif' /> :
           <React.Fragment>
             <div className={classes.wrapper}>
               { props.items.map(item =>
                 <div key={item.href} className={classes.imageBox}>
-                  <img className={classes.image} src={item.links[0].href} />
+                  <a href={item.links[0].href}><img className={classes.image} src={item.links[0].href} /></a>
                   <div className={classes.descriptionBox}>
                     <a className={classes.title} href={item.links[0].href}>{item.data[0].title}</a>
                   </div>
@@ -94,7 +125,7 @@ function SearchPage(props) {
               )}
             </div>
             <div className={classes.bottom}>
-              { props.page !== 1 && <a href='#' className={classes.prev} onClick={props.onClickPrev}>prev</a> }
+              { props.page != 1 && <a href='#' className={classes.prev} onClick={props.onClickPrev}>prev</a> }
               { !(props.items.length < 100) && <a href='#' className={classes.next} onClick={props.onClickNext}>next</a> }
             </div>
         </React.Fragment>

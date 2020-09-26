@@ -27,6 +27,7 @@ const styles = {
   searchButton: {
     position: 'absolute',
     left: 'calc(50% - 110px/2)',
+    outline: '0',
     marginTop: '80px',
     backgroundColor: '#0B3D91',
     color: '#FFFF',
