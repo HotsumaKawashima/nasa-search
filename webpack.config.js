@@ -38,7 +38,7 @@ module.exports = (env, argv) => {
           {
             test: /\.(png|jpe?g|gif)$/i,
             use: {
-              loader: 'file-loader?name=[name].[ext]'
+              loader: 'base64-inline-loader?name=[name].[ext]'
             }
           }
         ]
@@ -47,6 +47,7 @@ module.exports = (env, argv) => {
       plugins: [
         new HtmlWebpackPlugin({
           template: './public/index.html',
+          favicon: './public/favicons.png',
           inlineSource: 'index.js',
         }),
         new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
