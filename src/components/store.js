@@ -23,7 +23,6 @@ export default initialState => {
         routerMiddleware(history),
         thunk,
         sagaMiddleware,
-        logger,
       ))
     ),
     runSaga: sagaMiddleware.run

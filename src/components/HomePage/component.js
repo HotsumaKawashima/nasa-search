@@ -2,6 +2,8 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/styles';
 
+import logo from '../../images/logo.png';
+
 const styles = {
   logo: {
     position: 'relative',
@@ -45,7 +47,7 @@ function HomePage(props) {
   return (
     <div>
       <div className={classes.logo}>
-        <img className={classes.logoDefault} src='/images/nasa-logo-web-rgb.png'/>
+        <img className={classes.logoDefault} src={logo}/>
       </div>
       <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
       <button className={classes.searchButton} onClick={props.onClickSearchButton}>SEARCH !</button>

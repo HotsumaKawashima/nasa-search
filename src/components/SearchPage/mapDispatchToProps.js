@@ -2,6 +2,7 @@ import * as Action from './action';
 import * as FetchPhotoAction from '../../sagas/fetchPhoto/action';
 
 import { pushSearchPage } from './operation';
+import { pushHomePage }   from '../HomePage/operation';
 
 export const onLoadPage = () => {
   return (dispatch, getState) => {
@@ -30,6 +31,13 @@ export const onInputKeyDown = (e) => {
 export const onClickSearchButton = () => {
   return (dispatch, getState) => {
     dispatch(pushSearchPage(getState().searchPage.input, 1));
+  }
+}
+
+export const onClickLogo = (e) => {
+  return (dispatch, getState) => {
+    e.preventDefault();
+    dispatch(pushHomePage());
   }
 }
 

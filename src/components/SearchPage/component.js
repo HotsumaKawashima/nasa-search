@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 
 import { withStyles } from '@material-ui/styles';
 
+import logo from '../../images/logo.png';
+import load from '../../images/load.gif';
+
 const styles = {
   inputBox: {
     top: '0px',
@@ -109,11 +112,11 @@ function SearchPage(props) {
   return (
     <div>
       <div className={classes.inputBox}>
-        <img className={classes.logo} src='/images/nasa-logo-web-rgb.png' />
+        <a href='#' onClick={props.onClickLogo}><img className={classes.logo} src={logo} /></a>
         <input className={classes.input} value={props.input} onKeyDown={props.onInputKeyDown} onChange={props.onInputChange}/>
         <button className={classes.searchButton} onClick={props.onClickSearchButton}>SEARCH !</button>
       </div>
-      { props.loading ? <img className={classes.load} src='/images/load.gif' /> :
+      { props.loading ? <img className={classes.load} src={load} /> :
           <React.Fragment>
             <div className={classes.wrapper}>
               { props.items.map(item =>
